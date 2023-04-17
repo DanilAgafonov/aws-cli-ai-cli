@@ -74,14 +74,18 @@ yargs(hideBin(process.argv))
         console.log(`${chalk.blue("Final command:")} ${output}`);
       }
 
-      await inquirer.prompt([
+      const { confirmed } = await inquirer.prompt([
         {
           type: "confirm",
-          name: "run",
+          name: "confirmed",
           message: "Run command?",
           default: false,
         },
       ]);
+
+      if (!confirmed) {
+        process.exit(0);
+      }
 
       const awsCliProcess = exec(output);
 
