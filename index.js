@@ -52,14 +52,14 @@ yargs(hideBin(process.argv))
         output = output + chunkValue;
       }
 
-      const placeholders = output.match(/<([^>]+)>/g);
+      const placeholders = new Set(output.match(/<([^>]+)>/g));
 
       loading.stop();
 
       console.log(`${chalk.blue("Generated command:")} ${output}`);
 
       const placeholderValues = await inquirer.prompt(
-        placeholders.map((placeholder) => ({
+        [...placeholders].map((placeholder) => ({
           type: "input",
           name: placeholder,
           message: placeholder,
@@ -67,7 +67,7 @@ yargs(hideBin(process.argv))
       );
 
       Object.entries(placeholderValues).forEach(([placeholder, value]) => {
-        output = output.replace(placeholder, value);
+        output = output.replaceAll(placeholder, value);
       });
 
       console.log(`${chalk.blue("Final command:")} ${output}`);
