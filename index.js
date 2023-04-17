@@ -58,19 +58,25 @@ yargs(hideBin(process.argv))
 
       console.log(`${chalk.blue("Generated command:")} ${output}`);
 
-      const placeholderValues = await inquirer.prompt(
-        [...placeholders].map((placeholder) => ({
-          type: "input",
-          name: placeholder,
-          message: placeholder,
-        }))
-      );
+      if (placeholders.size === 0) {
+        console.log(
+          `${chalk.yellow("No placeholders found in generated command")}`
+        );
+      } else {
+        const placeholderValues = await inquirer.prompt(
+          [...placeholders].map((placeholder) => ({
+            type: "input",
+            name: placeholder,
+            message: placeholder,
+          }))
+        );
 
-      Object.entries(placeholderValues).forEach(([placeholder, value]) => {
-        output = output.replaceAll(placeholder, value);
-      });
+        Object.entries(placeholderValues).forEach(([placeholder, value]) => {
+          output = output.replaceAll(placeholder, value);
+        });
 
-      console.log(`${chalk.blue("Final command:")} ${output}`);
+        console.log(`${chalk.blue("Final command:")} ${output}`);
+      }
 
       await inquirer.prompt([
         {
