@@ -19,6 +19,10 @@ yargs(hideBin(process.argv))
     async (args) => {
       const prompt = args.prompt;
 
+      const loading = new clui.Spinner("Waiting for API response...");
+
+      loading.start();
+
       const response = await fetch(
         "https://aws-cli-ai.vercel.app/api/generate",
         {
@@ -41,9 +45,6 @@ yargs(hideBin(process.argv))
       let done = false;
 
       let output = "";
-      const loading = new clui.Spinner("Waiting for API response...");
-
-      loading.start();
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
