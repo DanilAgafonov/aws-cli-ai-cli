@@ -58,11 +58,7 @@ yargs(hideBin(process.argv))
 
       console.log(`${chalk.blue("Generated command:")} ${output}`);
 
-      if (placeholders.size === 0) {
-        console.log(
-          `${chalk.yellow("No placeholders found in generated command")}`
-        );
-      } else {
+      if (placeholders.size > 0) {
         const placeholderValues = await inquirer.prompt(
           [...placeholders].map((placeholder) => ({
             type: "input",
