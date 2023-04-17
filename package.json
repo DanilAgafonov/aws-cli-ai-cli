@@ -1,0 +1,29 @@
+{
+  "name": "aws-ai",
+  "version": "0.1.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "packageManager": "pnpm@8.2.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "aws-ai": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "clui": "^0.3.6",
+    "inquirer": "^9.1.5",
+    "yargs": "^17.7.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.7"
+  }
+}
